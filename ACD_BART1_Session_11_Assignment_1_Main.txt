@@ -37,11 +37,70 @@ Not Applicable
    Problem Statement
 1. Use the given link and locate the bank marketing dataset. Data Set Link
 Perform the below operations:
+
 a. Create a visual for representing missing values in the dataset.
+
+Answer:
+Answer:
+
+# read/import bank.csv
+> bank <- read.csv("C:/Users/Manish Chugh/Desktop/bank.csv", sep=";")
+>   View(bank)
+
+# install package Amelia
+> install.packages("Amelia")
+> library(Amelia)
+
+# using missmap to find missing values in dataset
+> missmap(bank)
+plot saaved on github id: 
+        DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.1/11.1a missmap(bank).png
+      
+# as per the plot there are no missing values in the dataset
+> isTRUE(is.na(bank))
+[1] FALSE
+
 b. Show a distribution of clients based on a Job.
+Answer:
+> install.packages("ggplot2")
+> library(ggplot2)
+> ggplot(bank, aes(x=job, y=age, fill=job)) +   
++   geom_boxplot(alpha=0.6) +
++   ggtitle("Age based on job")
+> 
+Plot saved on github id: 
+        DATA-ANALYTICS-WITH-R-EXCEL-TABLEAU_Session11Assignment11.1/11.1b distribution of clients based on a Job.png
+   
+   
 c. Check whether is there any relation between Job and Marital Status?
+Answer:
+# Use Pearson's chi-squared test method 
+# Null hypothesis: Ho shows No relation and Ha shows Relation between job and marital status
+
+> chisq.test(bank$job ,bank$marital)
+
+	Pearson's Chi-squared test
+
+data:  bank$job and bank$marital
+X-squared = 373.18, df = 22, p-value < 2.2e-16
+
+# As p-value is less than 0.05 we can reject Null hypothesis. 
+# There is significant relation between job and marital status.
+
+
 d. Check whether is there any association between Job and Education?
 
+Answer:
+> # Pearson's Chi-squared test
+> chisq.test(bank$job ,bank$education)
+
+	Pearson's Chi-squared test
+
+data:  bank$job and bank$education
+X-squared = 2840, df = 33, p-value < 2.2e-16
+
+> # As p-value is less than 0.05 we can reject Null hypothesis. 
+> # There is significant relation between job and education.
 
    Expected Output
 Not Applicable
